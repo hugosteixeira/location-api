@@ -12,7 +12,7 @@ class LocationController {
   async store({ request, response, auth }) {
     const data = request.only(["name", "address", "latitude", "longitude"])
     data.user_id = auth.user.id
-    if (LocationService.checkExists(data.address)){
+    if (await LocationService.checkExists(data.address)){
       return response.status(409).json({error:true, message:"Location Already Exists"})
     }
     return LocationService.store(data)

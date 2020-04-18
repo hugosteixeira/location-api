@@ -29,4 +29,6 @@ Route.group(() => {
 
   Route.post("rating", "RatingController.store")
 
+  Route.get('/sessions', 'SessionController.logout')
+  Route.get('/sessions/:token', 'SessionController.refresh')
 }).middleware('auth').prefix('api/v1')
