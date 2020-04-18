@@ -28,7 +28,6 @@ class LocationService {
 
     static async update(data) {
         const location = await Location.findOrFail(data.id)
-        console.log(location)
         location.merge(data)
         await location.save(data)
         return location

@@ -1,18 +1,30 @@
-const User = use('App/Models/User');
+const UserService = use('App/Services/UserService');
 
 class UserController {
-  async store({ request }) {
+  async store({ request, response }) {
     const data = request.only(['username', 'email', 'password']);
+    if (UserService.find(data.email)) {
+      return response.status(409).json({ error: true, message: "Email already exists" })
+    }
     const user = await User.create(data);
     return user;
   }
 
-  async update({ request }) {
-    const data = request.all();
+  async update({ request, auth, params, response }) {
+    const data = request.all()
+    if (data.oldPassword) {
+      if (await UserService.checkPassword(data, auth.user)) {
+        return await UserService.updatePassword(data, auth.user)
+      } else {
+        return response.status(400).json({ error: true, message: "Passwords does not match" })
+      }
+    }
 
-    const user = await User.create(data);
+    if (await UserService.find(data.email)) {
+      return response.status(409).json({ error: true, message: "Email already exists" })
+    }
+    return await UserService.updateEmail(data, auth.user)
 
-    return user;
   }
 }
 
