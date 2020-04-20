@@ -33,6 +33,16 @@ HASH_DRIVER=bcrypt
 
 Your server now should be running in the localhost:3000
 
+#Routes
+
+```
+Cadastro, Visualizar Perfil, Atualiar: /users
+Login, Deletar Refresh Token: /sessions
+Resource Location: /locations
+Cadastrar Sessions: /rating
+
+
+```
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
