@@ -33,7 +33,7 @@ HASH_DRIVER=bcrypt
 
 Your server now should be running in the localhost:3000
 
-#Routes
+## Routes
 
 ```
 Cadastro, Visualizar Perfil, Atualiar: /users
