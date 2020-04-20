@@ -6,7 +6,7 @@ class UserController {
     if ( await UserService.find(data.email)) {
       return response.status(409).json({ error: true, message: "Email already exists" })
     }
-    const user = await User.create(data);
+    const user = await UserService.create(data);
     return user;
   }
 

@@ -6,7 +6,8 @@ const Hash = use('Hash')
 
 class UserService {
     static async find(data) {
-        let user = await User.findBy('email', data)
+        const user = await User.findBy('email', data)
+        console.log(user)
         return user
     }
 
@@ -23,6 +24,11 @@ class UserService {
     static async updatePassword(data, user) {
         user.password = await Hash.make(data.password)
         await user.save()
+        return user
+    }
+
+    static async create(data) {
+        const user = await User.create(data)
         return user
     }
 
